@@ -1,0 +1,30 @@
+﻿@model List<NotificationListDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.Count > 0)
+{
+    @foreach (var item in Model)
+    {
+        <div class="alert alert-light p-3 my-2">
+            <form class="my-1" method="post" asp-action="Index">
+                <p class="lead">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    @item.Description
+                    <button type="submit" class="btn btn-outline-info btn-sm float-right">Read</button>
+                </p>
+            </form>
+        </div>
+    }
+}
+else
+{
+    <div class="alert alert-light p-3 my-2">
+        <p class="lead">
+            You have no unread notification
+        </p>
+    </div>
+}
+

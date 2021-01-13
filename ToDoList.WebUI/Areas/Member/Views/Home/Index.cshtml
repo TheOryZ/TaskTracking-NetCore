@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Member/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row mt-3">
+    <div class="col-md-6">
+        <div class="card text-white bg-primary mb-3 text-center">
+            <div class="card-body">
+                <h4 class="card-title">Finished Task Count</h4>
+                @if (ViewBag.FinishedWorkCount > 0)
+                {
+                    <p class="card-text display-4">@ViewBag.FinishedWorkCount</p>
+                    <p class="text-right">
+                        Click to <a asp-action="Index" asp-controller="Work" class="text-white"><i class="fas fa-chevron-circle-right"></i> review</a>
+                    </p>
+                }
+                else
+                {
+                    <p class="card-text lead">Did not complete any task</p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-white bg-primary mb-3 text-center">
+            <div class="card-body">
+                <h4 class="card-title">Unfinished Task Count</h4>
+                @if (ViewBag.ActiveWorkCount > 0)
+                {
+                    <p class="card-text display-4">@ViewBag.ActiveWorkCount</p>
+                    <p class="text-right">
+                        Click to <a asp-action="Index" asp-controller="TaskAssignment" class="text-white"><i class="fas fa-chevron-circle-right"></i> review</a>
+                    </p>
+                }
+                else
+                {
+                    <p class="card-text lead">You have no unfinished tasks. Congratulations</p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-white bg-primary mb-3 text-center">
+            <div class="card-body">
+                <h4 class="card-title">Unread Notifications Count</h4>
+                @if (ViewBag.UnReadNotificationsCount > 0)
+                {
+                    <p class="card-text display-4">@ViewBag.UnReadNotificationsCount</p>
+                    <p class="text-right">
+                        Click to <a asp-action="Index" asp-controller="Notification" class="text-white"><i class="fas fa-chevron-circle-right"></i> review</a>
+                    </p>
+                }
+                else
+                {
+                    <p class="card-text lead">You have no unread notification</p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-white bg-primary mb-3 text-center">
+            <div class="card-body">
+                <h4 class="card-title">Report Count</h4>
+                @if (ViewBag.ReportCount > 0)
+                {
+                    <p class="card-text display-4">@ViewBag.ReportCount</p>
+
+                }
+                else
+                {
+                    <p class="card-text lead">You haven't written any reports</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

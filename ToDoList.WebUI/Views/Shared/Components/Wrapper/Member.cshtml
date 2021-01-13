@@ -1,0 +1,24 @@
+﻿@model AppUserListDto
+@{ string active = TempData["Active"]?.ToString(); }
+
+<!-- Sidebar -->
+<div class="border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading">
+        <img src="~/img/@Model.Picture" alt="@Model.Name" style="height:10rem!important; width:13rem!important;" class="w-100 img-thumbnail" />
+    </div>
+    <div class="list-group list-group-flush">
+        <a asp-action="Index" asp-controller="Home" class="list-group-item list-group-item-action @(active=="home"?"active":"")"><i class="fas fa-home mr-2"></i> Home</a>
+        <a asp-action="Index" asp-controller="TaskAssignment" class="list-group-item list-group-item-action @(active=="incomingTasks"?"active":"")"><i class="fas fa-arrow-alt-circle-down mr-2"></i> Incoming Tasks</a>
+        <a asp-action="Index" asp-controller="Work" class="list-group-item list-group-item-action @(active=="completedTasks"?"active":"")"><i class="fas fa-arrow-alt-circle-up mr-2"></i> Completed Tasks</a>
+        <a asp-action="Index" asp-controller="Profile" class="list-group-item list-group-item-action @(active=="profile"?"active":"")"><i class="fas fa-user-circle mr-2"></i> Profile</a>
+        <a asp-action="Index" asp-controller="Notification" class="list-group-item list-group-item-action @(active=="notifications"?"active":"") position-relative">
+            <i class="fas fa-bell mr-2"></i>
+            @if (ViewBag.NotificationCount > 0)
+            {
+                <sub class="badge badge-info badge-pill position-absolute" style="bottom:0.625rem!important; left:1.7rem!important;">@ViewBag.NotificationCount</sub>
+            }
+            Notifications
+        </a>
+        <a asp-area="" asp-action="Logout" asp-controller="Home" class="list-group-item list-group-item-action @(active=="logout"?"active":"")"><i class="fas fa-sign-out-alt mr-2"></i> Log Out</a>
+    </div>
+</div>

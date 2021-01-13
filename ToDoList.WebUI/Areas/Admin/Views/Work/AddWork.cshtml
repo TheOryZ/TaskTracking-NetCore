@@ -1,0 +1,32 @@
+﻿@model WorkAddDto
+@{
+    ViewData["Title"] = "AddWork";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-action="AddWork" asp-controller="Work" method="post" class="w-75 mx-auto p-3 ">
+    <div class="form-group">
+        <label> Name :</label>
+        <span asp-validation-for="Name" class="text-danger"></span>
+        <input class="form-control" type="text" asp-for="Name" />
+    </div>
+    <div class="form-group">
+        <label>Description :</label>
+        <span asp-validation-for="Description" class="text-danger"></span>
+        <textarea class="form-control" asp-for="Description"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Please select an urgency</label>
+        <span class="text-danger" asp-validation-for="UrgencyId"></span>
+        <select class="form-control" asp-for="UrgencyId" asp-items="ViewBag.Urgencies">
+            <option value="-1" hidden>Choose</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-sm btn-outline-info"><i class="fas fa-plus-square mr-2"></i> Add New Task</button>
+</form>
+
+@section JavaScript{
+    <script src="~/lib/jqueryValidate/jquery.validate.min.js"></script>
+    <script src="~/lib/jqueryUnob/jquery.validate.unobtrusive.min.js"></script>
+}
+

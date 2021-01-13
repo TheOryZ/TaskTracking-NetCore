@@ -1,0 +1,89 @@
+﻿@model List<WorkListDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.Count > 0)
+{
+    <a asp-action="AddWork" asp-controller="Work" class="btn btn-sm btn-outline-info my-2"><i class="fas fa-plus-square mr-2"></i> Add New Task</a>
+    <a asp-action="FinishedWorks" asp-controller="Work" class="btn btn-sm btn-outline-warning my-2"><i class="fas fa-eye mr-2"></i> Show Finished Tasks</a>
+    <table class="table table-sm table-hover">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Create Date</th>
+            <th>Urgency</th>
+            <th>Operations</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@item.CreatedDate.ToString("D")</td>
+                <td>@item.Urgency.Description</td>
+                <td>
+                    <a asp-action="UpdateWork" asp-route-id="@item.Id" class="btn btn-outline-warning btn-sm"><i class="fas fa-pen-square"></i> Update</a>
+                    <a href="" data-id="@item.Id" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-danger btn-sm"><i class="fas fa-minus-square"></i> Delete</a>
+                </td>
+            </tr>
+
+        }
+    </table>
+}
+else
+{
+    <div class="p-3 text-center mt-3 lead">
+        <p class="lead">No task found</p>
+        <a asp-action="AddWork" asp-controller="Work" class="btn btn-sm btn-outline-info"><i class="fas fa-plus-square mr-2"></i> Add New Task</a>
+    </div>
+}
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete Task ??
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="btnDelete" type="button" class="btn btn-primary">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section JavaScript{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#exampleModal").on("show.bs.modal", function (event) {
+                let triggerElement = $(event.relatedTarget);
+                let id = triggerElement.data("id");
+
+                $("#btnDelete").click(function () {
+                    $.ajax({
+                        type: "Get",
+                        url: "./Work/DeleteWork",
+                        data: { id: id },
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8;",
+                        success: function () {
+                            //alert("Process completed");
+                            window.location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.statusText);
+                        }
+                    })
+                });
+            })
+        });
+
+    </script>
+
+}

@@ -1,0 +1,45 @@
+﻿@model AppUserSignUpDto
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_StandartLayout.cshtml";
+}
+
+<form asp-action="Register" asp-controller="Home" method="post" class="my-3 w-75 mx-auto p-3 shadow">
+    <h4 class="text-center">Register</h4>
+    <div class="form-group">
+        <label asp-for="Name">Name :</label>
+        <span asp-validation-for="Name" class="text-danger"></span>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Surname">Surname :</label>
+        <span asp-validation-for="Surname" class="text-danger"></span>
+        <input asp-for="Surname" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Email">Email :</label>
+        <span asp-validation-for="Email" class="text-danger"></span>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="UserName">User Name :</label>
+        <span asp-validation-for="UserName" class="text-danger"></span>
+        <input asp-for="UserName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Password">Password :</label>
+        <span asp-validation-for="Password" class="text-danger"></span>
+        <input type="password" asp-for="Password" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ConfirmPassword">Confirm Password :</label>
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        <input type="password" asp-for="ConfirmPassword" class="form-control" />
+    </div>
+    <div asp-validation-summary="ModelOnly" class="text-danger">
+
+    </div>
+    <a asp-action="Index" asp-controller="Home" class="btn btn-outline-warning btn-sm">Cancel</a>
+    <button type="submit" class="btn btn-outline-info btn-sm">Register</button>
+</form>
+
